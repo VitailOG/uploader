@@ -1,5 +1,3 @@
-import boto3
-
 from .base import BaseUploader
 
 
@@ -8,6 +6,7 @@ class S3Uploader(BaseUploader):
     upload_name = "s3"
 
     def __init__(self):
+        import boto3
         self.s3 = boto3.resource('s3')
         self.bucket = self.s3.Bucket(self.AWS_BUCKET)
 

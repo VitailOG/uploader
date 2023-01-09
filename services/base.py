@@ -1,6 +1,6 @@
 from abc import abstractmethod
 
-from .register import Register
+from register import Register
 
 
 class BaseUploader(metaclass=Register):

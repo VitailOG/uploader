@@ -1,3 +1,3 @@
-from .s3 import S3Uploader  # noqa
-from .file import FileUploader  # noqa
-from .base import BaseUploader  # noqa
+from .file import *  # noqa
+from .base import *  # noqa
+from .s3 import *  # noqa

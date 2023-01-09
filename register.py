@@ -11,6 +11,7 @@ class Register(ABCMeta):
 
     def __new__(cls, name, bases, attrs, **extra_kwargs):
         ins = super().__new__(cls, name, bases, attrs, **extra_kwargs)
+
         if inspect.isabstract(ins):
             return ins
 
@@ -31,7 +32,6 @@ class Register(ABCMeta):
     @final
     def handler(cls, name: str, *args, **kwargs):
         try:
-            print(type(cls.UPLOADERS[name](*args, **kwargs)))
             return cls.UPLOADERS[name](*args, **kwargs)
         except KeyError:
             raise UploaderDoesNotExist(f"Uploader with name {name} doesn't exist!!!")
