@@ -1,0 +1,2 @@
+class UploaderDoesNotExist(Exception):
+    pass
