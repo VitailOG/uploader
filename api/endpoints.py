@@ -9,9 +9,10 @@ router = APIRouter(tags=['s3'])
 
 @router.put('/')
 def upload(file: UploadFile, uploader: str = Form(...)):
+    filename = file.filename
     content = file.file.read()
-    BaseUploader.handler(uploader).upload(content)
-    return {"uploaded": True}
+    BaseUploader.handler(uploader).upload(content, filename)
+    return {"uploaded": True, "key": filename}
 
 
 @router.post('/')
@@ -20,7 +21,7 @@ def get(data_upload: FileSchema):
     return Response(
         content=file,
         headers={
-            "Content-Disposition": "attachment;filename=test.pdf",
+            "Content-Disposition": f"attachment;filename={data_upload.key}",
             "Content-Type": "application/octet-stream"
         }
     )

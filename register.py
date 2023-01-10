@@ -7,7 +7,7 @@ from exceptions import UploaderDoesNotExist
 
 
 class Register(ABCMeta):
-    UPLOADERS: dict[str, 'Register'] = {}
+    UPLOADERS: dict[str, "Register"] = {}
 
     def __new__(cls, name, bases, attrs, **extra_kwargs):
         ins = super().__new__(cls, name, bases, attrs, **extra_kwargs)
@@ -16,9 +16,12 @@ class Register(ABCMeta):
             return ins
 
         if "upload_name" not in attrs:
-            raise ValueError
+            raise AttributeError(f"{name} must be have attribute `upload_name`")
 
-        return cls.register_handler(attrs['upload_name'])(ins)
+        if not isinstance(attrs["upload_name"], str):
+            raise TypeError("Attribute upload_name must be str")
+
+        return cls.register_handler(attrs["upload_name"])(ins)
 
     @classmethod
     @final

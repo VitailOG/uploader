@@ -6,7 +6,7 @@ from register import Register
 class BaseUploader(metaclass=Register):
 
     @abstractmethod
-    def upload(self, content: bytes):
+    def upload(self, content: bytes, filename: str) -> None:
         pass
 
     @abstractmethod
